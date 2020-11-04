@@ -14,4 +14,18 @@ const Headlines = connection.define('headlines', {
 
 Headlines.sync({ force: false })
 
+Headlines.save = async (data) => {
+  const { title } = data
+
+  const headlineExists = await Headlines.findOne({
+    where: { title }
+  })
+
+  if (headlineExists) return false
+
+  const headline = await Headlines.create({ title })
+
+  return headline
+}
+
 module.exports = Headlines
