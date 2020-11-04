@@ -34,4 +34,32 @@ const Players = connection.define('players', {
 
 Players.sync({ force: false })
 
+Players.save = async (data) => {
+  const {
+    name,
+    fortalezaPlayer,
+    isIdol,
+    isIconic,
+    isCurrentFortalezaPlayer
+  } = data
+
+  const playerExists = await Players.findOne({
+    where: {
+      name
+    }
+  })
+
+  if (playerExists) return false
+
+  const player = await Players.create({
+    name,
+    fortalezaPlayer,
+    isIdol,
+    isIconic,
+    isCurrentFortalezaPlayer
+  })
+
+  return player
+}
+
 module.exports = Players

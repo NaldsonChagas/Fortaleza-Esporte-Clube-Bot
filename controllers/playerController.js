@@ -12,26 +12,18 @@ module.exports = {
     } = req.body
 
     try {
-      const playerExists = await Players.findOne({
-        where: {
-          name
-        }
-      })
-
-      if (playerExists) {
-        return res.status(400).json({
-          status: 'err',
-          message: 'This player already exists'
-        })
-      }
-
-      const player = await Players.create({
+      const player = await Players.save({
         name,
         fortalezaPlayer,
         isIdol,
         isIconic,
         isCurrentFortalezaPlayer
       })
+
+      if (!player) {
+        return res.status(400)
+          .json({ status: 'err', message: 'This player already exists' })
+      }
 
       res.json({ status: 'ok', player })
     } catch (e) {
