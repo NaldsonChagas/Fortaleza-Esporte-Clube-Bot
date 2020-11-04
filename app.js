@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const server = require('./server/server')
 
-server.listen(3000, () => console.log("It's works"))
+server.listen(process.env.PORT, () => console.log("It's works"))
