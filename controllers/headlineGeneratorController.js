@@ -42,9 +42,7 @@ async function getVariableResult (word) {
 
   if (playerTable.includes(word)) {
     const players = await Players.filterByVariable(word)
-    console.log({ players })
     const player = utils.randomArray(players)
-    console.log({ player })
     return player.name
   }
   if (teamTable.includes(word)) {}
