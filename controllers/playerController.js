@@ -5,10 +5,10 @@ module.exports = {
   async  new (req, res) {
     const {
       name,
-      fortalezaplayer: fortalezaPlayer,
-      isidol: isIdol,
-      isiconic: isIconic,
-      iscurrentfortalezaplayer: isCurrentFortalezaPlayer
+      fortalezaPlayer,
+      isIdol,
+      isIconic,
+      isCurrentFortalezaPlayer
     } = req.body
 
     try {
