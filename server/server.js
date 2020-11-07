@@ -10,6 +10,10 @@ const headlineGeneratorRouter = require('../routes/headlineGeneratorRouter')
 
 app.get('/', (req, res) => res.json({ message: 'Hi!' }))
 
+const guard = require('../middlewares/guard')
+
+app.use(guard)
+
 app.use('/player', playerRouter)
 app.use('/headline', headlineRouter)
 app.use('/team', teamRouter)
