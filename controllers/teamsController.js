@@ -19,5 +19,24 @@ module.exports = {
       console.error(e)
       res.status(500).json({ status: 'err' })
     }
+  },
+  async newInLargeScala (req, res) {
+    const { teams = [] } = req.body
+
+    const savedTeams = []
+    const teamsWithErrors = []
+
+    try {
+      for (const team of teams) {
+        const savedTeam = await Teams.save({ name: team.name })
+
+        if (!savedTeams) teamsWithErrors.push(team.name)
+        else savedTeams.push(savedTeam)
+      }
+      res.json({ status: 'ok', savedTeams, teamsWithErrors })
+    } catch (e) {
+      console.error(e)
+      res.status(500).json({ status: 'err' })
+    }
   }
 }

@@ -32,7 +32,7 @@ module.exports = {
     }
   },
   async newInLargeScala (req, res) {
-    const { players } = req.body
+    const { players = [] } = req.body
 
     const savedPlayers = []
     const playersWithErrors = []
@@ -48,8 +48,7 @@ module.exports = {
         })
 
         if (!savedPlayer) playersWithErrors.push(player.name)
-
-        savedPlayers.push(savedPlayer)
+        else savedPlayers.push(savedPlayer)
       }
       res.json({ status: 'ok', savedPlayers, playersWithErrors })
     } catch (e) {

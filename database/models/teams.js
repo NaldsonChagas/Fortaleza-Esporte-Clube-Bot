@@ -25,6 +25,8 @@ Teams.save = async (data) => {
 
   const team = await Teams.create({ name })
 
+  console.log({ team })
+
   return team
 }
 
