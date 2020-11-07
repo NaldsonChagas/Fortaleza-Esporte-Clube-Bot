@@ -4,6 +4,6 @@ const router = express.Router()
 const playerController = require('../controllers/playerController')
 
 router.post('/', playerController.new)
-router.post('/inscala', playerController.newInLargeScala)
+router.post('/inLargeScala', playerController.newInLargeScala)
 
 module.exports = router
