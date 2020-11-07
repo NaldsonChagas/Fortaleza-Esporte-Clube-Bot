@@ -10,7 +10,8 @@ const dbConfig = {
 const connection = new Sequelize(
   dbConfig.db, dbConfig.username, dbConfig.password, {
     host: dbConfig.host,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    logging: false
   })
 
 module.exports = connection
