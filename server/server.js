@@ -12,8 +12,9 @@ const twitterRouter = require('../routes/twitterRouter')
 
 app.get('/', (req, res) => res.json({ message: 'Hi!' }))
 
-const guard = require('../middlewares/guard')
+app.use('/twitter', twitterRouter)
 
+const guard = require('../middlewares/guard')
 app.use(guard)
 
 app.use('/player', playerRouter)
@@ -21,6 +22,5 @@ app.use('/headline', headlineRouter)
 app.use('/team', teamRouter)
 app.use('/character', characterRouter)
 app.use('/generator', headlineGeneratorRouter)
-app.use('/twitter', twitterRouter)
 
 module.exports = app
