@@ -80,7 +80,7 @@ Players.filterByVariable = async (word) => {
     }
     case '_iconicPlayer_': {
       where = {
-        iconicPlayer: true
+        isIconic: true
       }
       break
     }
