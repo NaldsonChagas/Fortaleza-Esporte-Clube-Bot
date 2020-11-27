@@ -48,7 +48,7 @@ Headlines.checkIfWasPostedInLast12Hours = async (sortedHeadline) => {
       [Op.and]: {
         lastPost: {
           [Op.gte]: Sequelize
-            .literal("(NOW() - INTERVAL '24 hours' )")
+            .literal("(NOW() - INTERVAL '48 hours' )")
         },
         title: sortedHeadline.title
       }
