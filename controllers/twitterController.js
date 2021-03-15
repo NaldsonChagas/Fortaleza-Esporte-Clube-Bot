@@ -3,7 +3,10 @@ const { generateHeadline } = require('../database/models/headlines')
 
 function tweetCallback (res, headline) {
   return (error) => {
-    if (error) return res.status(500).json("Can't tweet this")
+    if (error) {
+      console.log({ error })
+      return res.status(500).json("Can't tweet this")
+    }
     return res.json({ status: 'ok', tweet: headline })
   }
 }
