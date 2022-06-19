@@ -20,7 +20,7 @@ describe('PlayerService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('Test get all players methot', () => {
+  describe('Test get all players method', () => {
     it('Should reurn all players', async () => {
       const players: Player[] = [
         {
