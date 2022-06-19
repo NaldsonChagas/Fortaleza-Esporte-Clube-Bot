@@ -1,8 +1,25 @@
-import { HttpModule } from '@nestjs/axios';
-import { ConfigModule } from '@nestjs/config';
+import { HttpModule, HttpService } from '@nestjs/axios';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Player } from './player';
 import { PlayerService } from './player.service';
+
+const players: Player[] = [
+  {
+    name: 'Player 1',
+    isFortalezaPlayer: true,
+    isIdol: true,
+    isIconic: true,
+    isCurrentFortalezaPlayer: true,
+  },
+  {
+    name: 'Player 2',
+    isFortalezaPlayer: true,
+    isIdol: true,
+    isIconic: true,
+    isCurrentFortalezaPlayer: true,
+  },
+];
 
 describe('PlayerService', () => {
   let service: PlayerService;
@@ -10,7 +27,29 @@ describe('PlayerService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule, ConfigModule],
-      providers: [PlayerService],
+      providers: [
+        PlayerService,
+        {
+          provide: ConfigService,
+          useValue: {
+            get: jest.fn((key: string) => {
+              if (key === 'PLAYERS_ENDPOINT') return 'http://localhost/testing';
+              return null;
+            }),
+          },
+        },
+        {
+          provide: HttpService,
+          useValue: {
+            axiosRef: {
+              get: jest.fn(() => {
+                const data = { players };
+                return { data };
+              }),
+            },
+          },
+        },
+      ],
     }).compile();
 
     service = module.get<PlayerService>(PlayerService);
@@ -21,29 +60,10 @@ describe('PlayerService', () => {
   });
 
   describe('Test get all players method', () => {
-    it('Should reurn all players', async () => {
-      const players: Player[] = [
-        {
-          name: 'Player 1',
-          isFortalezaPlayer: true,
-          isIdol: true,
-          isIconic: true,
-          isCurrentFortalezaPlayer: true,
-        },
-        {
-          name: 'Player 2',
-          isFortalezaPlayer: true,
-          isIdol: true,
-          isIconic: true,
-          isCurrentFortalezaPlayer: true,
-        },
-      ];
-
+    it('Should return all players', async () => {
       const result: Promise<Player[]> = new Promise((resolve) =>
         resolve(players),
       );
-
-      jest.spyOn(service, 'getPlayers').mockImplementation(() => result);
 
       expect(await service.getPlayers()).toBe(await result);
     });
