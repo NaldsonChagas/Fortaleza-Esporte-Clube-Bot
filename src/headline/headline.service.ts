@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { CharacterService } from 'src/character/character.service';
 import { PlayerService } from 'src/player/player.service';
 import { TeamService } from 'src/team/team.service';
 import { ArrayUtils } from 'src/utils/ArrayUtils';
@@ -14,6 +15,7 @@ export class HeadlineService {
     private readonly configService: ConfigService,
     private readonly playerService: PlayerService,
     private readonly teamService: TeamService,
+    private readonly characterService: CharacterService,
   ) {}
 
   public async getHeadlines(): Promise<Headline[]> {
@@ -40,6 +42,12 @@ export class HeadlineService {
       if (Variable.TEAM_VARIABLES.includes(variable)) {
         const randomTeam = await this.teamService.getRandomTeam();
         headline = this.inputVariable(headline, variable, randomTeam.name);
+      }
+
+      if (Variable.CHARACTER_VARIABLES.includes(variable)) {
+        const randomCharacter =
+          await this.characterService.getRandomCharacter();
+        headline = this.inputVariable(headline, variable, randomCharacter.name);
       }
     }
     return headline;

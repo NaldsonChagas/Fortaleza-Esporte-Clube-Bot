@@ -7,5 +7,6 @@ import { CharacterService } from './character.service';
   imports: [HttpModule],
   controllers: [CharacterController],
   providers: [CharacterService],
+  exports: [CharacterService],
 })
 export class CharacterModule {}

@@ -8,4 +8,6 @@ export class Variable {
   ];
 
   static readonly TEAM_VARIABLES = ['_teamName_'];
+
+  static readonly CHARACTER_VARIABLES = ['_character_'];
 }
