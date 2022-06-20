@@ -4,8 +4,9 @@ import { AppService } from './app.service';
 import { PlayerModule } from './player/player.module';
 import { ConfigModule } from '@nestjs/config';
 import { CharacterModule } from './character/character.module';
+import { HeadlineModule } from './headline/headline.module';
 @Module({
-  imports: [PlayerModule, ConfigModule.forRoot({ isGlobal: true }), CharacterModule],
+  imports: [PlayerModule, ConfigModule.forRoot({ isGlobal: true }), CharacterModule, HeadlineModule],
   controllers: [AppController],
   providers: [AppService],
 })
