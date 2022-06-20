@@ -6,4 +6,6 @@ export class Variable {
     '_iconicPlayer_',
     '_currentFortalezaPlayer_',
   ];
+
+  static readonly TEAM_VARIABLES = ['_teamName_'];
 }

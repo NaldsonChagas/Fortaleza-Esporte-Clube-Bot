@@ -5,8 +5,9 @@ import { PlayerModule } from './player/player.module';
 import { ConfigModule } from '@nestjs/config';
 import { CharacterModule } from './character/character.module';
 import { HeadlineModule } from './headline/headline.module';
+import { TeamModule } from './team/team.module';
 @Module({
-  imports: [PlayerModule, ConfigModule.forRoot({ isGlobal: true }), CharacterModule, HeadlineModule],
+  imports: [PlayerModule, ConfigModule.forRoot({ isGlobal: true }), CharacterModule, HeadlineModule, TeamModule],
   controllers: [AppController],
   providers: [AppService],
 })
