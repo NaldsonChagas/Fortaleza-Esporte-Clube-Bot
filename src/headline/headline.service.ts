@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { CharacterService } from 'src/character/character.service';
 import { PlayerService } from 'src/player/player.service';
 import { TeamService } from 'src/team/team.service';
-import { ArrayUtils } from 'src/utils/ArrayUtils';
+import { ArrayUtils } from 'src/utils/array.utils';
 import { Variable } from 'src/variables/variables';
 import { Headline } from './headline';
 

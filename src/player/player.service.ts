@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ArrayUtils } from 'src/utils/ArrayUtils';
+import { ArrayUtils } from 'src/utils/array.utils';
 import { Player } from './player';
 
 @Injectable()
