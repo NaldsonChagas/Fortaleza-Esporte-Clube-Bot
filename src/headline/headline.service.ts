@@ -42,7 +42,7 @@ export class HeadlineService {
     variable: string,
     value: string,
   ): Headline {
-    headline.title = headline.title.replace(variable, value);
+    headline.title = headline.title.split(variable).join(value);
     return headline;
   }
 }
