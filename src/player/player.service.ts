@@ -22,12 +22,16 @@ export class PlayerService {
     const players = await this.getPlayers();
 
     const playersByVariable = players.filter((player) => {
-      if (variable === '_fortalezaPlayer_') return player.isFortalezaPlayer;
-      else if (variable === '_idolName_') return player.isIdol;
-      else if (variable === '_iconicPlayer_') return player.isIconic;
-      else if (variable === '_currentFortalezaPlayer_')
-        return player.isCurrentFortalezaPlayer;
-      else if (variable === '_playerName_') return players;
+      const attributesByVariables = {
+        _fortalezaPlayer_: player.isFortalezaPlayer,
+        _idolName_: player.isIdol,
+        _iconicPlayer_: player.isIconic,
+        _currentFortalezaPlayer_: player.isCurrentFortalezaPlayer,
+        _playerName_: true,
+      };
+      if (Object.keys(attributesByVariables).includes(variable)) {
+        return attributesByVariables[variable];
+      }
     });
 
     return ArrayUtils.returnRandomItem<Player>(playersByVariable);
