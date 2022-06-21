@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ArrayUtils } from 'src/utils/array.utils';
+import { ArrayUtils } from '../utils/array.utils';
 import { Player } from './player';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class PlayerService {
       else if (variable === '_iconicPlayer_') return player.isIconic;
       else if (variable === '_currentFortalezaPlayer_')
         return player.isCurrentFortalezaPlayer;
-      else return players;
+      else if (variable === '_playerName_') return players;
     });
 
     return ArrayUtils.returnRandomItem<Player>(playersByVariable);

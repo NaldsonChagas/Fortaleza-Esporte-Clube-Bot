@@ -1,6 +1,7 @@
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ArrayUtils } from '../utils/array.utils';
 import { Player } from './player';
 import { PlayerService } from './player.service';
 
@@ -26,7 +27,7 @@ describe('PlayerService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [HttpModule, ConfigModule],
+      imports: [HttpModule, ConfigModule, ArrayUtils],
       providers: [
         PlayerService,
         {
@@ -66,6 +67,24 @@ describe('PlayerService', () => {
       );
 
       expect(await service.getPlayers()).toBe(await result);
+    });
+  });
+
+  describe('Test getRandomPlayer method', () => {
+    it('Should return a random player', async () => {
+      const variable = '_currentFortalezaPlayer_';
+      const randomPlayer = await service.getRandomPlayer(variable);
+      expect(randomPlayer).toHaveProperty('name');
+      expect(randomPlayer).toHaveProperty('isFortalezaPlayer');
+      expect(randomPlayer).toHaveProperty('isIdol');
+      expect(randomPlayer).toHaveProperty('isIconic');
+      expect(randomPlayer).toHaveProperty('isCurrentFortalezaPlayer');
+    });
+
+    it('Should return undefined if variable is invalid', async () => {
+      const variable = 'variable test';
+      const randomPlayer = await service.getRandomPlayer(variable);
+      expect(randomPlayer).toBeUndefined();
     });
   });
 });
